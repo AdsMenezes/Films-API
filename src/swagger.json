@@ -1,0 +1,12 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Films",
+    "description": "Nesse documento você encontra todos as rotas fornecidas pela API-REST, assim como sua utilização, parâmetros e seus respectivos retornos, você também encontra como a API lida com os seus erros externos e internos.",
+    "version": "1.0.0",
+    "contact": {
+      "email": "anderson@codrop.com.br"
+    }
+  },
+  "paths": {}
+}
