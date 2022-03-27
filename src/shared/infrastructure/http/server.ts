@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import 'dotenv/config'
 
 import express from 'express'
@@ -6,9 +7,12 @@ import swagger from 'swagger-ui-express'
 import helmet from 'helmet'
 import cors from 'cors'
 
+import 'express-async-errors'
 import '@shared/infrastructure/typeorm'
+import '@shared/container'
 
 import routes from './routes'
+import exeptions from './middlewares/exeptions'
 import documentation from '../../../swagger.json'
 
 const app = express()
@@ -19,5 +23,6 @@ app.use(helmet())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(routes)
+app.use(exeptions)
 
 export default app
