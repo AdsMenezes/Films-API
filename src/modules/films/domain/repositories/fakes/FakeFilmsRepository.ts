@@ -6,7 +6,7 @@ import ICreateFilmDTO from '../../dtos/ICreateFilmDTO'
 import IGetAllFilmsByPaginationDTO from '../../dtos/IGetAllFilmsByPaginationDTO'
 
 export default class FakeFilmsRepository implements IFilmsRepository {
-  private films: Film[]
+  private films: Film[] = []
 
   public async getCount(): Promise<number> {
     return this.films.length
