@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
+import { isCelebrateError } from 'celebrate'
 
 import AppException from '@shared/errors/AppException'
 
@@ -8,6 +9,17 @@ export default function exeptions(
   response: Response,
   _: NextFunction
 ): Response {
+  if (isCelebrateError(err)) {
+    const message = Array.from(err.details, ([method, validation]) => ({
+      status: 'Error',
+      message: validation.details[0].message,
+      key: validation.details[0].context.key,
+      method,
+    })).shift()
+
+    return response.status(400).json(message)
+  }
+
   if (err instanceof AppException) {
     return response.status(err.statusCode).json({
       error: 'Error',

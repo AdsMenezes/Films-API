@@ -5,9 +5,9 @@ import QueryGhibliAPIService from '@modules/films/domain/services/QueryGhibliAPI
 
 class QueryGhibliAPIController {
   public async handle(request: Request, response: Response): Promise<Response> {
-    const service = container.resolve(QueryGhibliAPIService)
+    const queryGhibliAPI = container.resolve(QueryGhibliAPIService)
 
-    await service.execute()
+    await queryGhibliAPI.execute()
 
     return response.status(201).send()
   }
