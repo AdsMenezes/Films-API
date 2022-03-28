@@ -8,5 +8,147 @@
       "email": "anderson@codrop.com.br"
     }
   },
-  "paths": {}
+  "paths": {
+    "/films": {
+      "get": {
+        "tags": ["Films"],
+        "summary": "Lista de filmes.",
+        "description": "Método responsável por retorna os filmes cadastrados.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "limit": {
+                      "type": "number",
+                      "example": 5
+                    },
+                    "offset": {
+                      "type": "number",
+                      "example": 1
+                    },
+                    "total": {
+                      "type": "number",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/Film"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/films/search": {
+      "get": {
+        "tags": ["Films"],
+        "summary": "Buscar filmes por titulo.",
+        "description": "Método responsável por realizar uma busca de filmes por titulo.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "title",
+            "schema": {
+              "type": "integer",
+              "required": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Film"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/films/ghibli": {
+      "get": {
+        "tags": ["Films"],
+        "summary": "Consultar Ghibli-API",
+        "description": "Método responsável por realizar uma consulta na API da Ghibli e salvar os filmes retornado na base de dados.",
+        "responses": {
+          "201": {
+            "description": "Created."
+          },
+          "503": {
+            "description": "Service Unavailable - Ocorreu um problema ao consultar a API Ghibli."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Film": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "title": {
+          "type": "string"
+        },
+        "original_title": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "release_date": {
+          "type": "string"
+        },
+        "rt_score": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "timestamp",
+          "example": "2022-03-28T00:35:31.868Z"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "timestamp",
+          "example": "2022-03-28T00:35:31.868Z"
+        }
+      }
+    }
+  }
 }
